@@ -1,55 +1,81 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
-@Table(
-    name = "campaigns",
-    uniqueConstraints = @UniqueConstraint(columnNames = "campaign_name")
-)
 public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "campaign_name", nullable = false, unique = true)
+    @Column(unique = true)
     private String campaignName;
 
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @Column(precision = 19, scale = 2)
     private BigDecimal budget;
 
     private Boolean active = true;
 
-    public Campaign() {}
-
-    @PrePersist
-    public void onCreate() {
-        if (active == null) {
-            active = true;
-        }
+    public Campaign() {
     }
 
-    // Getters & Setters
-    public Long getId() { return id; }
+    public Campaign(String campaignName, LocalDate startDate, LocalDate endDate, BigDecimal budget) {
+        this.campaignName = campaignName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.budget = budget;
+    }
 
-    public String getCampaignName() { return campaignName; }
-    public void setCampaignName(String campaignName) { this.campaignName = campaignName; }
+    public Long getId() {
+        return id;
+    }
 
-    public LocalDate getStartDate() { return startDate; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public LocalDate getEndDate() { return endDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public String getCampaignName() {
+        return campaignName;
+    }
 
-    public BigDecimal getBudget() { return budget; }
-    public void setBudget(BigDecimal budget) { this.budget = budget; }
+    public void setCampaignName(String campaignName) {
+        this.campaignName = campaignName;
+    }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }

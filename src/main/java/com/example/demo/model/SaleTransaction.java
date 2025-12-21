@@ -1,11 +1,10 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "sale_transactions")
 public class SaleTransaction {
 
     @Id
@@ -13,15 +12,20 @@ public class SaleTransaction {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "discount_code_id", nullable = false)
     private DiscountCode discountCode;
 
-    @Column(precision = 19, scale = 2, nullable = false)
     private BigDecimal saleAmount;
 
     private LocalDateTime transactionDate;
 
-    public SaleTransaction() {}
+    public SaleTransaction() {
+    }
+
+    public SaleTransaction(DiscountCode discountCode, BigDecimal saleAmount, LocalDateTime transactionDate) {
+        this.discountCode = discountCode;
+        this.saleAmount = saleAmount;
+        this.transactionDate = transactionDate;
+    }
 
     @PrePersist
     public void onCreate() {
@@ -30,14 +34,35 @@ public class SaleTransaction {
         }
     }
 
-    // Getters & Setters
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public DiscountCode getDiscountCode() { return discountCode; }
-    public void setDiscountCode(DiscountCode discountCode) { this.discountCode = discountCode; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public BigDecimal getSaleAmount() { return saleAmount; }
-    public void setSaleAmount(BigDecimal saleAmount) { this.saleAmount = saleAmount; }
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
 
-    public LocalDateTime getTransactionDate() { return transactionDate; }
+    public void setDiscountCode(DiscountCode discountCode) {
+        this.discountCode = discountCode;
+    }
+
+    public BigDecimal getSaleAmount() {
+        return saleAmount;
+    }
+
+    public void setSaleAmount(BigDecimal saleAmount) {
+        this.saleAmount = saleAmount;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
 }
