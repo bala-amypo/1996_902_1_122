@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Campaign;
+import com.example.demo.model.Campaign;
 import java.util.List;
 
 public interface CampaignService {
@@ -12,6 +12,4 @@ public interface CampaignService {
     Campaign getCampaignById(Long id);
 
     List<Campaign> getAllCampaigns();
-
-    void deactivateCampaign(Long id);
 }

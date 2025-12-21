@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.DiscountCode;
+import com.example.demo.model.DiscountCode;
 import java.util.List;
 
 public interface DiscountCodeService {
@@ -14,6 +14,4 @@ public interface DiscountCodeService {
     List<DiscountCode> getCodesByInfluencer(Long influencerId);
 
     List<DiscountCode> getCodesByCampaign(Long campaignId);
-
-    void deactivateCode(Long id);
 }
