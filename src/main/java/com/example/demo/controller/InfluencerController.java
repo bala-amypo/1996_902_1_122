@@ -1,37 +1,32 @@
+package com.example.demo.controller;
+import com.example.demo.model.Influencer;
+import com.example.demo.service.InfluencerService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/influencers")
-@Tag(name = "Influencers")
+@RequestMapping("/influencers")
 public class InfluencerController {
 
-    private final InfluencerService service;
+    private final InfluencerService influencerService;
 
-    public InfluencerController(InfluencerService service) {
-        this.service = service;
+    public InfluencerController(InfluencerService influencerService) {
+        this.influencerService = influencerService;
     }
 
     @PostMapping
-    public Influencer create(@RequestBody Influencer influencer) {
-        return service.createInfluencer(influencer);
-    }
-
-    @PutMapping("/{id}")
-    public Influencer update(@PathVariable Long id,
-                             @RequestBody Influencer influencer) {
-        return service.updateInfluencer(id, influencer);
+    public Influencer createInfluencer(@RequestBody Influencer influencer) {
+        return influencerService.createInfluencer(influencer);
     }
 
     @GetMapping("/{id}")
-    public Influencer getById(@PathVariable Long id) {
-        return service.getInfluencerById(id);
+    public Influencer getInfluencerById(@PathVariable Long id) {
+        return influencerService.getInfluencerById(id);
     }
 
     @GetMapping
-    public List<Influencer> getAll() {
-        return service.getAllInfluencers();
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateInfluencer(id);
+    public List<Influencer> getAllInfluencers() {
+        return influencerService.getAllInfluencers();
     }
 }
