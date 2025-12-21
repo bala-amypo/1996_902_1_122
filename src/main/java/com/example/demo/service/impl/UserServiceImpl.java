@@ -1,33 +1,34 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.User;
-import com.example.demo.exception.EntityNotFoundException;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
-    private final PasswordEncoder encoder;
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository repository,
-                           PasswordEncoder encoder) {
-        this.repository = repository;
-        this.encoder = encoder;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public User registerUser(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        return repository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 }
