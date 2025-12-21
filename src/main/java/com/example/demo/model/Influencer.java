@@ -1,13 +1,6 @@
-package com.example.demo.entity;
-
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "influencers",
-    uniqueConstraints = @UniqueConstraint(columnNames = "social_handle")
-)
 public class Influencer {
 
     @Id
@@ -16,40 +9,49 @@ public class Influencer {
 
     private String name;
 
-    @Column(name = "social_handle", nullable = false, unique = true)
+    @Column(unique = true)
     private String socialHandle;
-
-    private String email;
 
     private Boolean active = true;
 
-    private LocalDateTime createdAt;
-
-    public Influencer() {}
-
-    @PrePersist
-    public void onCreate() {
-        createdAt = LocalDateTime.now();
-        if (active == null) {
-            active = true;
-        }
+    public Influencer() {
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Influencer(String name, String socialHandle, Boolean active) {
+        this.name = name;
+        this.socialHandle = socialHandle;
+        this.active = active;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSocialHandle() { return socialHandle; }
-    public void setSocialHandle(String socialHandle) { this.socialHandle = socialHandle; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getName() {
+        return name;
+    }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    public String getSocialHandle() {
+        return socialHandle;
+    }
+
+    public void setSocialHandle(String socialHandle) {
+        this.socialHandle = socialHandle;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }
