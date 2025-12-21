@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.SaleTransaction;
+import com.example.demo.model.SaleTransaction;
 import java.util.List;
 
 public interface SaleTransactionService {
 
-    SaleTransaction logTransaction(SaleTransaction transaction);
+    SaleTransaction createSale(SaleTransaction transaction);
 
-    SaleTransaction getTransactionById(Long id);
+    SaleTransaction getSaleById(Long id);
 
     List<SaleTransaction> getSalesForCode(Long codeId);
 
