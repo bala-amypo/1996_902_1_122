@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
+    /* =========================
+       404 - NOT FOUND
+       ========================= */
     @ExceptionHandler({
             ResourceNotFoundException.class,
             InfluencerNotFoundException.class,
@@ -24,6 +26,9 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    /* =========================
+       400 - BAD REQUEST
+       ========================= */
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<String> handleDuplicate(DuplicateResourceException ex) {
         return ResponseEntity
@@ -31,8 +36,9 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
-
-
+    /* =========================
+       500 - INTERNAL SERVER ERROR
+       ========================= */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGeneric(Exception ex) {
         return ResponseEntity
