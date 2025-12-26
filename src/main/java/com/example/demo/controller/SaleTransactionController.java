@@ -1,6 +1,8 @@
 package com.example.demo.controller;
+
 import com.example.demo.model.SaleTransaction;
 import com.example.demo.service.SaleTransactionService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +18,31 @@ public class SaleTransactionController {
     }
 
     @PostMapping
-    public SaleTransaction createSale(@RequestBody SaleTransaction transaction) {
-        return saleTransactionService.createSale(transaction);
+    public ResponseEntity<SaleTransaction> createSale(@RequestBody SaleTransaction transaction) {
+        return ResponseEntity.ok(saleTransactionService.createSale(transaction));
     }
 
-    @GetMapping("/{id}")
-    public SaleTransaction getSaleById(@PathVariable Long id) {
-        return saleTransactionService.getSaleById(id);
-    }
-
-    @GetMapping("/code/{codeId}")
-    public List<SaleTransaction> getSalesByCode(@PathVariable Long codeId) {
-        return saleTransactionService.getSalesForCode(codeId);
+    @GetMapping("/code/{discountCodeId}")
+    public ResponseEntity<List<SaleTransaction>> getSalesForCode(
+            @PathVariable Long discountCodeId) {
+        return ResponseEntity.ok(
+                saleTransactionService.getSalesForCode(discountCodeId)
+        );
     }
 
     @GetMapping("/influencer/{influencerId}")
-    public List<SaleTransaction> getSalesByInfluencer(@PathVariable Long influencerId) {
-        return saleTransactionService.getSalesForInfluencer(influencerId);
+    public ResponseEntity<List<SaleTransaction>> getSalesForInfluencer(
+            @PathVariable Long influencerId) {
+        return ResponseEntity.ok(
+                saleTransactionService.getSalesForInfluencer(influencerId)
+        );
     }
 
     @GetMapping("/campaign/{campaignId}")
-    public List<SaleTransaction> getSalesByCampaign(@PathVariable Long campaignId) {
-        return saleTransactionService.getSalesForCampaign(campaignId);
+    public ResponseEntity<List<SaleTransaction>> getSalesForCampaign(
+            @PathVariable Long campaignId) {
+        return ResponseEntity.ok(
+                saleTransactionService.getSalesForCampaign(campaignId)
+        );
     }
 }

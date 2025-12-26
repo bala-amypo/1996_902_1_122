@@ -18,8 +18,10 @@ public class CampaignController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id, @RequestBody Campaign c) {
-        return ResponseEntity.ok(campaignService.updateCampaign(id, c));
+    public ResponseEntity<Campaign> updateCampaign(
+            @PathVariable Long id,
+            @RequestBody Campaign campaign) {
+        return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
     @GetMapping("/{id}")
