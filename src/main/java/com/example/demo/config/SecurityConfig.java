@@ -5,26 +5,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration                  // ✅ Marks config class
-@EnableWebSecurity              // ✅ Enables Spring Security
+@Configuration              // ✅ Marks this as configuration class
+@EnableWebSecurity          // ✅ Enables Spring Security
 public class SecurityConfig {
 
-    @Bean                       // ✅ Security filter bean (REQUIRED in Boot 3)
+    @Bean                   // ✅ Mandatory in Spring Boot 3+
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())   // ✅ Disable CSRF (for testing)
+            .csrf(csrf -> csrf.disable())           // disable CSRF (for testing)
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()  // ✅ Allow all requests
+                .anyRequest().permitAll()           // allow all requests
             );
 
         return http.build();
     }
 
-    @Bean                       // ✅ PasswordEncoder bean
+    @Bean                   // ✅ PasswordEncoder bean (fixes your error)
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
