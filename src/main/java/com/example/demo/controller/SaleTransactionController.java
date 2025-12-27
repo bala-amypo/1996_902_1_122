@@ -22,27 +22,8 @@ public class SaleTransactionController {
         return ResponseEntity.ok(saleTransactionService.createSale(transaction));
     }
 
-    @GetMapping("/code/{discountCodeId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForCode(
-            @PathVariable Long discountCodeId) {
-        return ResponseEntity.ok(
-                saleTransactionService.getSalesForCode(discountCodeId)
-        );
-    }
-
-    @GetMapping("/influencer/{influencerId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForInfluencer(
-            @PathVariable Long influencerId) {
-        return ResponseEntity.ok(
-                saleTransactionService.getSalesForInfluencer(influencerId)
-        );
-    }
-
-    @GetMapping("/campaign/{campaignId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForCampaign(
-            @PathVariable Long campaignId) {
-        return ResponseEntity.ok(
-                saleTransactionService.getSalesForCampaign(campaignId)
-        );
+    @GetMapping("/code/{id}")
+    public ResponseEntity<List<SaleTransaction>> getSalesForCode(@PathVariable Long id) {
+        return ResponseEntity.ok(saleTransactionService.getSalesForCode(id));
     }
 }

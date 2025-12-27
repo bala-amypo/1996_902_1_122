@@ -1,30 +1,14 @@
-package com.example.demo.model;
+package com.example.demo.service;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+import com.example.demo.model.Campaign;
+
 import java.util.List;
 
-@Entity
-public class Campaign {
+public interface CampaignService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Campaign updateCampaign(Long id, Campaign campaign);
 
-    private String campaignName;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    Campaign getCampaignById(Long id);
 
-    @OneToMany(mappedBy = "campaign")
-    private List<DiscountCode> discountCodes;
-
-    public Long getId() { return id; }
-    public String getCampaignName() { return campaignName; }
-    public LocalDate getStartDate() { return startDate; }
-    public LocalDate getEndDate() { return endDate; }
-
-    public void setId(Long id) { this.id = id; }
-    public void setCampaignName(String campaignName) { this.campaignName = campaignName; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    List<Campaign> getAllCampaigns();
 }

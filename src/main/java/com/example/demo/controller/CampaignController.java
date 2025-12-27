@@ -21,6 +21,7 @@ public class CampaignController {
     public ResponseEntity<Campaign> updateCampaign(
             @PathVariable Long id,
             @RequestBody Campaign campaign) {
+
         return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
