@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.Influencer;
+import com.example.demo.repository.InfluencerRepository;
 import com.example.demo.service.InfluencerService;
 import org.springframework.stereotype.Service;
 
@@ -9,18 +10,25 @@ import java.util.List;
 @Service
 public class InfluencerServiceImpl implements InfluencerService {
 
+    private final InfluencerRepository influencerRepository;
+
+    public InfluencerServiceImpl(InfluencerRepository influencerRepository) {
+        this.influencerRepository = influencerRepository;
+    }
+
     @Override
     public Influencer createInfluencer(Influencer influencer) {
-        return null;
+        return influencerRepository.save(influencer);
     }
 
     @Override
     public List<Influencer> getAllInfluencers() {
-        return null;
+        return influencerRepository.findAll();
     }
 
     @Override
     public Influencer getInfluencerById(Long id) {
-        return null;
+        return influencerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
     }
 }
