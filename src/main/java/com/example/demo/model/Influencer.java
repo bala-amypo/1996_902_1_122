@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "influencers")
 public class Influencer {
 
     @Id
@@ -11,16 +12,34 @@ public class Influencer {
     private Long id;
 
     private String name;
+
     private boolean active = true;
 
     @OneToMany(mappedBy = "influencer")
     private List<DiscountCode> discountCodes;
 
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public boolean isActive() { return active; }
+    // ✅ Default constructor
+    public Influencer() {}
 
+    // ✅ Parameterized constructor
+    public Influencer(Long id, String name, boolean active) {
+        this.id = id;
+        this.name = name;
+        this.active = active;
+    }
+
+    // ✅ Getters & Setters
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public List<DiscountCode> getDiscountCodes() { return discountCodes; }
+    public void setDiscountCodes(List<DiscountCode> discountCodes) {
+        this.discountCodes = discountCodes;
+    }
 }
