@@ -1,8 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity                  // Marks this class as a JPA entity
+@Entity
 @Table(name = "users")
 public class User {
 
@@ -10,18 +11,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(unique = true)
+    private String email;
 
-    @Column(nullable = false)
-    private String password;
+    private LocalDateTime createdAt;
 
-    public User() {}
+    public String getEmail() { return email; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    // getters and setters
+    public void setEmail(String email) { this.email = email; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

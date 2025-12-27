@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
+
+    boolean existsByName(String name);
 }
