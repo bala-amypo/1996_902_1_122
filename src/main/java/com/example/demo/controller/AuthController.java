@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-@RestController   // ✅ Controller annotation
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -14,7 +14,7 @@ public class AuthController {
     }
 
     @GetMapping("/encode/{password}")
-    public String encodePassword(@PathVariable String password) {
+    public String encode(@PathVariable String password) {
         return passwordEncoder.encode(password);
     }
 }
