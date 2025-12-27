@@ -1,14 +1,26 @@
-package com.example.demo.service;
+package com.example.demo.model;
 
-import com.example.demo.model.Influencer;
-
+import jakarta.persistence.*;
 import java.util.List;
 
-public interface InfluencerService {
+@Entity
+public class Influencer {
 
-    Influencer createInfluencer(Influencer influencer);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    List<Influencer> getAllInfluencers();
+    private String name;
+    private boolean active = true;
 
-    Influencer getInfluencerById(Long id);
+    @OneToMany(mappedBy = "influencer")
+    private List<DiscountCode> discountCodes;
+
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public boolean isActive() { return active; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setActive(boolean active) { this.active = active; }
 }

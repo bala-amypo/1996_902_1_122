@@ -1,16 +1,32 @@
-package com.example.demo.service;
+package com.example.demo.model;
 
-import com.example.demo.model.DiscountCode;
+import jakarta.persistence.*;
 
-import java.util.List;
+@Entity
+public class DiscountCode {
 
-public interface DiscountCodeService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    DiscountCode getDiscountCodeById(Long id);
+    private String codeValue;
+    private double discountPercentage;
 
-    DiscountCode updateDiscountCode(Long id, DiscountCode updated);
+    @ManyToOne
+    private Influencer influencer;
 
-    List<DiscountCode> getCodesForInfluencer(Long influencerId);
+    @ManyToOne
+    private Campaign campaign;
 
-    List<DiscountCode> getCodesForCampaign(Long campaignId);
+    public Long getId() { return id; }
+    public String getCodeValue() { return codeValue; }
+    public double getDiscountPercentage() { return discountPercentage; }
+    public Influencer getInfluencer() { return influencer; }
+    public Campaign getCampaign() { return campaign; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setCodeValue(String codeValue) { this.codeValue = codeValue; }
+    public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
+    public void setInfluencer(Influencer influencer) { this.influencer = influencer; }
+    public void setCampaign(Campaign campaign) { this.campaign = campaign; }
 }

@@ -1,16 +1,32 @@
-package com.example.demo.service;
+package com.example.demo.model;
 
-import com.example.demo.model.SaleTransaction;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
-import java.util.List;
+@Entity
+public class SaleTransaction {
 
-public interface SaleTransactionService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    SaleTransaction createSale(SaleTransaction transaction);
+    private BigDecimal transactionAmount;
+    private Timestamp transactionDate;
+    private Long customerId;
 
-    List<SaleTransaction> getSalesForCode(Long discountCodeId);
+    @ManyToOne
+    private DiscountCode discountCode;
 
-    List<SaleTransaction> getSalesForInfluencer(Long influencerId);
+    public Long getId() { return id; }
+    public BigDecimal getTransactionAmount() { return transactionAmount; }
+    public Timestamp getTransactionDate() { return transactionDate; }
+    public Long getCustomerId() { return customerId; }
+    public DiscountCode getDiscountCode() { return discountCode; }
 
-    List<SaleTransaction> getSalesForCampaign(Long campaignId);
+    public void setId(Long id) { this.id = id; }
+    public void setTransactionAmount(BigDecimal transactionAmount) { this.transactionAmount = transactionAmount; }
+    public void setTransactionDate(Timestamp transactionDate) { this.transactionDate = transactionDate; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+    public void setDiscountCode(DiscountCode discountCode) { this.discountCode = discountCode; }
 }
